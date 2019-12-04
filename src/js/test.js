@@ -1,3 +1,5 @@
-console.log("imported module");
+const testFunction = () => {
+  console.log("ALFAAAAA");
+};
 
-export default 43;
+export { testFunction };

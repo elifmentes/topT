@@ -1,4 +1,4 @@
-// console.log('Hello World!')
+console.log('Hello World!')
 let middlePile = [];
 let strength, skill, size, button, attr, HTMLs, player1, player2, gamePlaying, attributes;
 
@@ -8,7 +8,7 @@ function setAtr(atr) {
 }
 
 HTMLs = {
-  cardBackHtml: `<div class="card"><img id="backCard" src="CSS/images/topTrumps.png"></div>`,
+  cardBackHtml: `<div class="card"><img id="backCard" src="img/topTrumps.png"></div>`,
   html: `<div class="card">
           <div class="card-top">
             <div class="card-title">
@@ -93,9 +93,9 @@ class Card {
   }
 }
 
-const allCards = [new Card("Iron Man", 30, 9, 10, 5, 20, 10, "CSS/images/ironMan.png"), new Card("Dr. Strange", 15, 7, 8, 2, 80, 8, "CSS/images/drStrange.png"),
-new Card("Captain America", 28, 10, 10, 2, 25, 9, "CSS/images/captainAmerica.png"), new Card("Ant-Man", 10, 10, 11, 25, 7, "CSS/images/antMan.png"),
-new Card("Hulk", 50, 2, 5, 1, 20, 9, "CSS/images/hulk.png"), new Card("Thor", 30, 3, 11, 1, 75, 9, "CSS/images/thor.png")];
+const allCards = [new Card("Iron Man", 30, 9, 10, 5, 20, 10, "img/ironMan.png"), new Card("Dr. Strange", 15, 7, 8, 2, 80, 8, "img/drStrange.png"),
+new Card("Captain America", 28, 10, 10, 2, 25, 9, "img/captainAmerica.png"), new Card("Ant-Man", 10, 10, 11, 25, 7, "img/antMan.png"),
+new Card("Hulk", 50, 2, 5, 1, 20, 9, "img/hulk.png"), new Card("Thor", 30, 3, 11, 1, 75, 9, "img/thor.png")];
 
 init();
 
