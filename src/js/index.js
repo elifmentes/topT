@@ -148,9 +148,9 @@ const DOMstrings = {
   mystiqueBtn: '.mystique-button',
   ratingBtn: '.rating-button',
 
-  continueButton: '.continue',
-  newGame: '.new-game',
-  startButton: '.start-game'
+  continueButton: 'continue-btn',
+  newGame: 'play-btn',
+  // startButton: 'play-btn'
 };
 
 function replacements(html, title, image, strength, skill, size, wisecracks, mystique, rating) {
@@ -348,7 +348,7 @@ function nextCard(arr1, arr2, arr) {
 function playGame(player1, player2) {
   if(gamePlaying) {
     buttonsActive();
-    document.querySelector(DOMstrings.continueButton).addEventListener('click', function() {
+    document.getElementById(DOMstrings.continueButton).addEventListener('click', function() {
       nextCard(array1, array2, middlePile);
       hidePlayers(player1, player2);
       showPlayer(player1);
@@ -366,7 +366,7 @@ function playGame(player1, player2) {
       if(player1.cards.length === allCards.length || player2.cards.length === allCards.length) {
         removeButtons(player1);
 
-        let continueBtn = document.querySelector(DOMstrings.continueButton);
+        let continueBtn = document.getElementById(DOMstrings.continueButton);
         continueBtn.parentNode.removeChild(continueBtn);
 
         gamePlaying = false;
@@ -376,17 +376,17 @@ function playGame(player1, player2) {
 };
 
 
-document.querySelector(DOMstrings.newGame).addEventListener('click', function() {
+document.getElementById(DOMstrings.newGame).addEventListener('click', function() {
   cleanField(player1.containerId);
   cleanField(player2.containerId);
   init();
 });
 
-document.querySelector(DOMstrings.startButton).addEventListener('click', function() {
+document.getElementById(DOMstrings.newGame).addEventListener('click', function() {
   cleanField(player1.containerId);
   showPlayer(player1);
   playGame(player1, player2);
-  let startBtn = document.querySelector(DOMstrings.startButton);
+  let startBtn = document.getElementById(DOMstrings.newGame);
   startBtn.parentNode.removeChild(startBtn);
 });
 

@@ -1,0 +1,25 @@
+.game-bar {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-items {
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+}
+.right-items {
+  width: 50px;
+  padding: 25px;
+}
+
+.btn {
+  height: 50px;
+  width: 50px;
+}
+
+#continue-btn {
+  margin-left: 20px;
+}

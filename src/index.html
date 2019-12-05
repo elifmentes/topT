@@ -3,23 +3,41 @@
   <head>
     <meta charset = "UTF-8">
     <title>Top Trumps</title>
+
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div class="container">
-      <div class="card-boxes">
-        <div class="cards" id="card-player1">
+
+      <div class="main-box">
+
+        <div class="card-boxes">
+
+          <div class="card-box" id="card-player1">
+
+          </div>
+
+          <div class="card-box" id="card-player2">
+
+          </div>
 
         </div>
 
-        <div class="cards" id="card-player2">
-
+        <div class="game-bar">
+          <div class="left-items">
+            <div class="start-next">
+              <img src="img/play.png" alt="Play!" class="btn start-game" id="play-btn">
+              <img src="img/next.png" alt="Continue!" class="btn continue" id="continue-btn">
+            </div>
+          </div>
+          <div class="right-items">
+            <img src="img/settings.png" alt="Settings" class="btn settings" id="settings-btn">
+          </div>
         </div>
+
       </div>
     </div>
-    <button class="continue">Continue!</button>
-    <button class="start-game">Start!</button>
-    <button class="new-game">New Game!</button>
-    <script src = "index.js"></script>
+
+    <script src="index.js"></script>
   </body>
 </html>
