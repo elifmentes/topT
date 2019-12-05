@@ -4,15 +4,36 @@
 body {
   background-color: white;
   font-family: 'Montserrat', sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  /*position: relative;*/
+  /*display: flex;*/
 }
 
-.card-boxes {
-  display: flex;
-  background: white;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.1);
-  margin: 30px;
-  height: 420px;
-  width: auto;
+.container {
+
+  /*max-width: 900px;*/
 }
+
+.main-box {
+  /*overflow: hidden;*/
+  /*position: relative;*/
+  margin: 20px;
+  height: 100%;
+  /*width: 100%;*/
+}
+
+
+/*.game-bar {*/
+  /*width: 100%;*/
+  /*height: 100px;
+
+  box-sizing: content-box;
+  width: 100%;
+  background: #36413E;
+  border: 0.1px solid #C6C6C6;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;*/
+/*}*/
