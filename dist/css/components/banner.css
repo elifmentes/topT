@@ -1,0 +1,22 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.banner-content {
+  color: white;
+}
+
+.banner-content h1 {
+  font-size: 50px;
+}
+
+.banner-content p {
+  margin-bottom: 50px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 25px;
+}
