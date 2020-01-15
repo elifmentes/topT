@@ -1,28 +1,26 @@
 @import url("components/card.css");
 @import url("components/button.css");
+@import url("components/banner.css");
 
 body {
-  background-color: white;
-  font-family: 'Montserrat', sans-serif;
-  height: 100%;
-  width: 100%;
-  margin: 0px;
+  margin: 0;
+  font-family: Open-sans, sans-serif;
   /*position: relative;*/
   /*display: flex;*/
 }
 
-.container {
-
-  /*max-width: 900px;*/
+h1, h2, h3, p {
+  font-family: Raleway, Helvetica, sans-serif;
 }
 
-.main-box {
-  /*overflow: hidden;*/
-  /*position: relative;*/
-  margin: 20px;
+.text-center {
+  text-align: center;
+}
+
+/*main-page {
   height: 100%;
-  /*width: 100%;*/
-}
+  align-items: center;
+}*/
 
 
 /*.game-bar {*/
