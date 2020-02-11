@@ -19,4 +19,7 @@ export const elements = {
   contBtn: 'continue-btn',
   newGame: 'play-btn',
   content: 'content',
+  bannerContent: 'banner-content',
+  playMode: 'play-mode',
+  bannerMain: 'banner-main'
 }

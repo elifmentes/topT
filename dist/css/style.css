@@ -17,6 +17,11 @@ h1, h2, h3, p {
   text-align: center;
 }
 
+
+#play-mode {
+  display: flex;
+  justify-content: space-between;
+}
 /*main-page {
   height: 100%;
   align-items: center;

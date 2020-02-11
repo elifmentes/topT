@@ -1,14 +1,10 @@
 import card from './models/Card';
-import { elements } from './views/base'
-import * as cardView from './views/cardView'
+import { elements } from './views/base';
+import * as cardView from './views/cardView';
+import * as playView from './views/playView';
 
 let middlePile = [];
-let strength, skill, size, button, attr, HTMLs, player1, player2, gamePlaying, attributes;
-
-function setAtr(atr) {
-  let htmlAtr = `<p id="${atr}">${atr.charAt(0).toUpperCase() + atr.slice(1)}:</p><p class="${atr}-value">%${atr}%</p>`;
-  return htmlAtr;
-};
+let player1, player2, gamePlaying, attributes;
 
 player1 = {
     containerId: 'card-player1',
@@ -31,23 +27,16 @@ new card("Hulk", 50, 2, 5, 1, 20, 9, "./img/hulk.png"), new card("Thor", 30, 3, 
 
 // init();
 
-// GAME CONTROLLER
-
-// 1. Shuffle cards function
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+const shuffle = a => {
+ for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
-//  2. Deal cards function
-function dealCards(arr, player1, player2) {
+const dealCards = (arr, player1, player2) => {
   let cards1, cards2;
-
-  shuffle(arr);
 
   cards1 = player1.cards;
   cards2 = player2.cards;
@@ -60,13 +49,49 @@ function dealCards(arr, player1, player2) {
   for(let i = half; i < arr.length; i++) {
     cards2.push(arr[i])
   }
+};
+
+// GAME CONTROLLER
+const gameCtrl = (arr, p1, p2) => {
+  // 1. Shuffle cards function 
+  shuffle(arr);
+
+  // 2. Deal cards function
+  dealCards(arr, p1, p2);
+};
+
+
+
+
+// load 
+document.getElementById(elements.newGame).addEventListener('click', init);
+
+function init() {
+  // 1. Shuffle Cards
+  player1.cards = [];
+  player2.cards = [];
+
+  // 1a. Clean main page
+  playView.cleanField();
+
+
+  // 2. Deal Cards
+  gameCtrl(allCards, player1, player2);
+
+  cardView.renderCardwButtons(player1);
+  cardView.cardCover(player2);
+  playView.showGameBar();
+
+  console.log(allCards);
+  console.log(player1.cards);
+  console.log(player2.cards);
+
+  attributes.attr1 = 0;
+  attributes.attr2 = 0;
+  gamePlaying = true;
 }
 
 // ----------------------------------------------------
-
-function showCards(player) {
-  document.getElementById(elements.content).innerHTML = cardView.showCard(player);
-}
 
 // function playerEdit(container, player) {
 //   let getPlayer, htmlPlayer;
@@ -74,10 +99,6 @@ function showCards(player) {
 //   htmlPlayer = htmlReplacement(player);
 //   getPlayer.insertAdjacentHTML('beforeend', htmlPlayer);
 // }
-
-function cleanField(a) {
-  document.getElementById(a).innerHTML = "";
-}
 
 // // Show player's top card
 // function showPlayer(player) {
@@ -275,33 +296,6 @@ function cleanField(a) {
 //   startBtn.parentNode.removeChild(startBtn);
 // });
 
-document.getElementById(elements.newGame).addEventListener('click', init);
-
-function init() {
-  // 1. Shuffle Cards
-  player1.cards = [];
-  player2.cards = [];
-
-  // 1a. Clean main page
-  cleanField(elements.content);
-
-  // 2. Deal Cards
-  dealCards(allCards, player1, player2);
-
-  showCards(player1);
-  showCards(player2);
-
-  console.log(allCards);
-  console.log(player1.cards);
-  console.log(player2.cards);
-
-  // 3. Show Player
-  // showPlayer(player1);
-
-  attributes.attr1 = 0;
-  attributes.attr2 = 0;
-  gamePlaying = true;
-}
 
 
 
