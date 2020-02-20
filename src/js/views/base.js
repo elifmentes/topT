@@ -18,5 +18,11 @@ export const elements = {
 
   contBtn: 'continue-btn',
   newGame: 'play-btn',
-  content: 'content',
+  content: document.getElementById("content"),
+  bannerContent: document.querySelector('.banner-content'),
+  cartBtm: document.querySelector('.card-bottom'),
+  player1: document.querySelector('.player1'),
+  player2: document.querySelector('.player2'),
+  gameMode: document.querySelector('.game-mode'),
+  atrBtn: document.querySelector('.atr-btn')
 }
