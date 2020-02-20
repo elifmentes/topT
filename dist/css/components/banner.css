@@ -9,6 +9,7 @@
 
 .banner-content {
   color: white;
+  width: 100%;
 }
 
 .banner-content h1 {
@@ -20,3 +21,18 @@
   font-family: 'Assistant', sans-serif;
   font-size: 25px;
 }
+
+.player {
+  width: auto;
+}
+
+.opponent {
+  width: auto;
+}
+
+.game-mode {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
