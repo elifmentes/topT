@@ -9,7 +9,7 @@ export const cleanField = (a) => {
 };
 
 const markupNav = `<div class="navbar">
-  <div class="nav-left">
+  <div class="nav-left nav">
     <a href="#" class="btn-green btn-green-nav" data-goto="play-game">
       <img src="img/play.png" alt="Play!" class="btn start-game" id="play-btn">
     </a>
@@ -17,7 +17,7 @@ const markupNav = `<div class="navbar">
       <img src="img/next.png" alt="Play!" class="btn next-game" id="next-btn">
     </a>
   </div>
-  <div class="nav-right">
+  <div class="nav-right nav">
     <a href="#" class="btn-green btn-green-nav" data-goto="settings-game">
       <img src="img/settings.png" alt="Play!" class="btn settings" id="settings-btn">
     </a>
@@ -139,8 +139,8 @@ const modCard = {
   }
 };
 
-export const setPlayers = (a, player1, player2, tie, s) => {
-  if (s) {
+export const setPlayers = {
+  selective: function(a, player1, player2) {
     a.innerHTML =  
     `<div class="game-mode">
       <div class="player">
@@ -163,10 +163,11 @@ export const setPlayers = (a, player1, player2, tie, s) => {
       </div>
     </div>
     ${markupNav}`;
-  } else {
+  },
+  notSelective: function (a, player1, player2, player3) {
     a.innerHTML =  
     `<div class="game-stat">
-      <h4>${tie.stat ? tie.stat : ""}</h4>
+      <h4>${player3.stat ? player3.stat : ""}</h4>
     </div>
     <div class="game-mode">
       <div class="player">
@@ -182,7 +183,7 @@ export const setPlayers = (a, player1, player2, tie, s) => {
       <div class="opponent">
         <div class="opponent-title title">
           <h4>Your Opponent</h4>
-          <h4>${player2.stat ?player2.stat : ""}</h4>
+          <h4>${player2.stat ? player2.stat : ""}</h4>
         </div>
         ${modCard.notSelectable(player2)}
         <div class="score">

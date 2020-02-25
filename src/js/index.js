@@ -11,6 +11,7 @@ import * as gameCtrl from './controllers/gameController';
 
 // game variables
 let selective, gamePlaying; 
+const cont = elements.bannerContent;
 
 // define game cards
 const allCards = [new card("Iron Man", 30, 9, 10, 5, 20, 10, "./img/ironMan.png"), new card("Dr. Strange", 15, 7, 8, 2, 80, 8, "./img/drStrange.png"),
@@ -28,19 +29,17 @@ const tie = players[2];
 // cards controller
 const cardsCtrl = {
   // 1. Shuffle Cards
-  shuffle: function(a) {
-    for (let i = a.length - 1; i > 0; i--) {
+  shuffle: function(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    return a;
+    return arr;
   },
 
   // 2. Deal Cards
   dealCards: function(arr, player1, player2) {
     let cards1, cards2;
-
-    this.shuffle(arr);
 
     cards1 = player1.cards;
     cards2 = player2.cards;
@@ -56,69 +55,48 @@ const cardsCtrl = {
   }
 };
 
-// cards controller
-// navbar buttons
-// game controller
-// activating the buttons on game play
-
-const atrBtn = (a, b) => {
-  if(a) {
-    gameCtrl.controlCards(b, p1, p2, tie);
-
-    // 3. render both player cards without buttons 
-    cardView.setPlayers(elements.bannerContent, p1, p2, selective, tie);
-  }
+const atrBtnClicked = (attribute, player1, player2, player3) => {
+  // 1. Set selective to false
+  selective = false;
+  // 2. Set player stats
+  gameCtrl.controlCards(attribute, player1, player2, player3);
+  // 3. Pass cards
+  // gameCtrl.passingCard(player1, player2, player3);
+  // 4. Render both player cards without buttons 
+  cardView.setPlayers.notSelective(cont, player1, player2, player3);
+  
 };
 
-const navBtn = (a, b, c) => {
-  if (a && b === "play-game") {
+const navBtn = (btnOpt, player1, player2, player3) => {
+  if (btnOpt === "play-game") {
     init();
-  } else if (a && b === "next-card" && c === false) {
-    gameCtrl.passingCard(p1, p2, tie, selective);
+  } else if (btnOpt === "next-card") {
+    gameCtrl.passingCard(player1, player2, player3);
+    cardView.setPlayers.selective(cont, player1, player2, player3);
+    console.log(p1.cards);
+    console.log(p2.cards);
+    console.log(tie.cards);
   }
 };
 
-elements.bannerContent.addEventListener('click', e => {
-  const btn = e.target.closest('.atr-btn');
-  console.log(btn);
-
-  const atr = btn.dataset.goto;
-
-  // get the attribute button that the player clicked
-  atrBtn(btn, atr);
-
-  // If selective is false navbar next button is active
-
-  // If selective is true card buttons are active
-
-  // 1. while playing, game playing is true
-
-  // 2. track of player's cards
-
-  // 3. if there is a tie send two cards to middle pile
-
-  // 4. game over when a player's cards are 0
+cont.addEventListener('click', e => {
+  const btn = e.target.closest('.card-attribute');
+  if(btn) {
+    const atr = btn.dataset.goto;
+    atrBtnClicked(atr, p1, p2, tie, selective);
+    console.log(p1.cards);
+    console.log(p2.cards);
+    console.log(tie.cards)
+  }
 });
 
-elements.bannerContent.addEventListener('click', e => {
+cont.addEventListener('click', e => {
   const nav = e.target.closest('.btn-green-nav');
-  const clicked = nav.dataset.goto;
-  console.log(clicked);
-
-  // get the attribute button that the player clicked
-  navBtn(nav, clicked, selective);
-
-  // If selective is false navbar next button is active
-
-  // If selective is true card buttons are active
-
-  // 1. while playing, game playing is true
-
-  // 2. track of player's cards
-
-  // 3. if there is a tie send two cards to middle pile
-
-  // 4. game over when a player's cards are 0
+  if(nav) {
+    const navName = nav.dataset.goto;
+    console.log(typeof navName);
+    navBtn(navName, p1, p2, tie);
+  }
 });
 
 // Initialization
@@ -131,15 +109,16 @@ function init() {
   selective = true;
 
   // 3. Clean the banner & add the player divs
-  cardView.cleanField(elements.bannerContent);
+  cardView.cleanField(cont);
 
   // 4. Shuffle and deal cards
+  cardsCtrl.shuffle(allCards);
   cardsCtrl.dealCards(allCards, p1, p2);
   console.log(allCards);
   console.log(p1);
   console.log(p2);
 
-  cardView.setPlayers(elements.bannerContent, p1, p2, selective, tie);
+  cardView.setPlayers.selective(cont, p1, p2);
   // 5. Start playing
   // gamePlay();
 };
