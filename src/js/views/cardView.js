@@ -136,12 +136,30 @@ const modCard = {
 
   playerScore: function(player) {
     return player.cards.length;
+  },
+
+  notSelectableAll: function(card) {
+    let html = 
+    `<div class = "card">
+       <div class = "card-content">
+         <div class = "card-top">
+           <div class = "card-image" style = "background-image: url('${card.image}')"></div>
+           <div class = "top-content">
+             <h5 class = "card-title">${card.title}</h5>
+           </div>
+         </div>
+         <div class = "card-bottom">
+           ${showCard(card)}
+         </div>
+       </div>
+     </div>`;
+     return html;
   }
 };
 
-export const setPlayers = {
-  selective: function(a, player1, player2) {
-    a.innerHTML =  
+export const renderPlayers = {
+  selective: function(player1, player2) {
+    elements.bannerContent.innerHTML =  
     `<div class="game-mode">
       <div class="player">
         <div class="player-title title">
@@ -164,8 +182,8 @@ export const setPlayers = {
     </div>
     ${markupNav}`;
   },
-  notSelective: function (a, player1, player2, player3) {
-    a.innerHTML =  
+  notSelective: function (player1, player2, player3) {
+    elements.bannerContent.innerHTML =  
     `<div class="game-stat">
       <h4>${player3.stat ? player3.stat : ""}</h4>
     </div>
@@ -192,6 +210,30 @@ export const setPlayers = {
       </div>
     </div>
     ${markupNav}`;
+  },
+  opponentWin: function(player1, player2) {
+    elements.bannerContent.innerHTML =  
+    `<div class="game-mode">
+      <div class="player">
+        <div class="player-title title">
+          <h4>You</h4>
+        </div>
+        ${modCard.notSelectable(player1)}
+        <div class="score">
+          <h4>${modCard.playerScore(player1)} Cards</h4>
+        </div>
+      </div>
+      <div class="opponent">
+        <div class="opponent-title title">
+          <h4>Your Opponent</h4>
+        </div>
+        ${cardCover()}
+        <div class="score">
+          <h4>${modCard.playerScore(player2)} Cards</h4>
+        </div>
+      </div>
+    </div>
+    ${markupNav}`;
   }
 };
 
@@ -199,5 +241,26 @@ export const addGameBar = a => {
   const html = `<div class="navbar"><a href="#" class="btn-green"><img src="img/play.png" alt="Play!" class="btn start-game" id="play-btn"></a></div>`;
   a.insertAdjacentHTML('beforeend', html);
 };
+
+const listCards = (player) => {
+
+}
+
+export const showAllCards = (a, player) => {
+  a.innerHTML = `
+      <div class="final-mode">
+        <div class="player">
+          <div class="player-title title">
+            <h4>${player === p1 ? "You" : "Your Opponent"}</h4>
+            <h4>Game Winner</h4>
+          </div>
+          <ul class="list-cards">
+            
+          </ul>
+          <div class="score">
+            <h4>Cards</h4>
+          </div>
+        </div>`;
+}
 
 

@@ -12,6 +12,7 @@ import * as gameCtrl from './controllers/gameController';
 // game variables
 let selective, gamePlaying; 
 const cont = elements.bannerContent;
+const attributesOp = ["strength", "skill", "size", "wisecracks", "mystique", "rating"];
 
 // define game cards
 const allCards = [new card("Iron Man", 30, 9, 10, 5, 20, 10, "./img/ironMan.png"), new card("Dr. Strange", 15, 7, 8, 2, 80, 8, "./img/drStrange.png"),
@@ -19,7 +20,7 @@ new card("Captain America", 28, 10, 10, 2, 25, 9, "./img/captainAmerica.png"), n
 new card("Hulk", 50, 2, 5, 1, 20, 9, "./img/hulk.png"), new card("Thor", 30, 3, 11, 1, 75, 9, "./img/thor.png")];
 
 // define players
-const players = [new player(0, []), new player(1, []), new player(3, [])];
+const players = [new player(0, []), new player(1, []), new player(2, [])];
 
 // player shortcuts
 const p1 = players[0];
@@ -59,39 +60,32 @@ const cardsCtrl = {
 
 const atrBtnClicked = (attribute, player1, player2, player3) => {
   // 1. Set selective to false
-  selective = false;
-  // 2. Set player stats
-  gameCtrl.controlCards(attribute, player1, player2, player3);
-  // 3. Pass cards
-  // gameCtrl.passingCard(player1, player2, player3);
-  // 4. Render both player cards without buttons 
-  cardView.setPlayers.notSelective(cont, player1, player2, player3);
+  if (player1.cards.length > 0 && player2.cards.length > 0) {
+    // 2. Set player stats
+    gameCtrl.compareCards(attribute, player1, player2, player3);
+  };
   
+  console.log(player1.turn);
+  console.log(player2.turn);
 };
 
-const navBtn = (btnOpt, player1, player2, player3) => {
+const navBtn = (btnOpt, player1, player2, player3, arr) => {
   if (btnOpt === "play-game") {
     // 1. Reset Player Cards
     player1.cards = [];
     player2.cards = [];
     init();
   } else if (btnOpt === "next-card") {
-    gameCtrl.passingCard(player1, player2, player3);
-    cardView.setPlayers.selective(cont, player1, player2, player3);
-    console.log(p1.cards);
-    console.log(p2.cards);
-    console.log(tie.cards);
+    gameCtrl.nextCards(player1, player2, player3, arr);
   }
 };
 
+
 cont.addEventListener('click', e => {
-  const btn = e.target.closest('.card-attribute');
+  const btn = e.target.closest('.atr-btn');
   if(btn) {
     const atr = btn.dataset.goto;
-    atrBtnClicked(atr, p1, p2, tie, selective);
-    console.log(p1.cards);
-    console.log(p2.cards);
-    console.log(tie.cards)
+    atrBtnClicked(atr, p1, p2, tie, );
   }
 });
 
@@ -99,32 +93,34 @@ cont.addEventListener('click', e => {
   const nav = e.target.closest('.btn-green-nav');
   if(nav) {
     const navName = nav.dataset.goto;
-    navBtn(navName, p1, p2, tie);
+    navBtn(navName, p1, p2, tie, attributesOp);
+    console.log(p1.cards);
+    console.log(p2.cards);
+    console.log(tie.cards)
+    console.log(p1.turn);
+    console.log(p2.turn);
   }
 });
 
 // Initialization
-
 function init() {
   // 1. Set gamePlaying true
   gamePlaying = true;
+  p1.turn = "P1 plays"
+  p2.turn = "P2 doesn't play"
 
-  // 2. Set selective to true
-  selective = true;
-
-  // 3. Clean the banner & add the player divs
+  // 2. Clean the banner & add the player divs
   cardView.cleanField(cont);
 
-  // 4. Shuffle and deal cards
+  // 3. Shuffle and deal cards
   cardsCtrl.dealCards(allCards, p1, p2);
 
   console.log(allCards);
   console.log(p1);
   console.log(p2);
 
-  cardView.setPlayers.selective(cont, p1, p2);
-  // 5. Start playing
-  // gamePlay();
+  // 4. Render player
+  cardView.renderPlayers.selective(p1, p2);
 };
 
 
