@@ -40,7 +40,9 @@ const cardsCtrl = {
   // 2. Deal Cards
   dealCards: function(arr, player1, player2) {
     let cards1, cards2;
+    cardView.cleanField(cont);
 
+    this.shuffle(arr);
     cards1 = player1.cards;
     cards2 = player2.cards;
 
@@ -69,6 +71,9 @@ const atrBtnClicked = (attribute, player1, player2, player3) => {
 
 const navBtn = (btnOpt, player1, player2, player3) => {
   if (btnOpt === "play-game") {
+    // 1. Reset Player Cards
+    player1.cards = [];
+    player2.cards = [];
     init();
   } else if (btnOpt === "next-card") {
     gameCtrl.passingCard(player1, player2, player3);
@@ -94,7 +99,6 @@ cont.addEventListener('click', e => {
   const nav = e.target.closest('.btn-green-nav');
   if(nav) {
     const navName = nav.dataset.goto;
-    console.log(typeof navName);
     navBtn(navName, p1, p2, tie);
   }
 });
@@ -112,8 +116,8 @@ function init() {
   cardView.cleanField(cont);
 
   // 4. Shuffle and deal cards
-  cardsCtrl.shuffle(allCards);
   cardsCtrl.dealCards(allCards, p1, p2);
+
   console.log(allCards);
   console.log(p1);
   console.log(p2);
