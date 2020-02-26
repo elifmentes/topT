@@ -5,15 +5,11 @@
   padding: 10px;
   align-items: center;
   height: 320px;
-  /*text-align: center;*/
 }
 
 .card-content {
   width: 230px;
-  /*margin: 5px auto;*/
-  /*height: 320px;*/
   align-items: center;
-  /*text-align: center;*/
 }
 
 .card-top {
@@ -27,7 +23,6 @@
   background-size: cover;
   height: 200px;
   width: 230px;
-  /*margin: auto;*/
 }
 
 .card-title {
@@ -43,23 +38,27 @@
   display: flex;
   justify-content: space-between;
   width: 230px;
-  /*line-height: 25px;*/
-  /*height: 25px;*/
-  /*margin: 5px;*/
 }
 
 .card-attribute {
-  /*line-height: 25px;*/
   display: flex;
   justify-content: space-between;
   border: 1px solid rgb(87,87,87);
   border-radius: 1px;
   align-items: center;
-  /*margin-bottom: 5px;*/
-  /*padding: 2px;*/
-/*  margin: 1px;*/
-  /*width: 110px;*/
+  padding: 0px 2px;
   height: 25px;
+}
+
+.atr-btn {
+  text-decoration: none;
+  color: white;
+}
+
+.atr-btn:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(255,255,255,0.3);
 }
 
 .card-atrbs {
@@ -75,10 +74,31 @@
 .atr {
   margin: 0px;
 }
-/*
-.card-rating {
-  margin-bottom: 0px;
-}*/
+
+.final-mode {
+  height: 100%;
+  width: 100%;
+}
+
+.final-mode .player-title {
+  margin-bottom: 125px;
+}
+
+.list-cards {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 150px;
+}
+
+.list-cards li {
+  margin: -100px;
+}
+
+.list-cards .card { 
+  background-color: rgba(0,0,0,.9);
+}
+
 
 
 
