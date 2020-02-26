@@ -100,34 +100,34 @@ const cardCover = () => {
 };
 
 const modCard = {
-  selectable: function(player) {
+  selectable: function(card) {
     let html = `<div class = "card">
            <div class = "card-content">
              <div class = "card-top">
-               <div class = "card-image" style = "background-image: url('${player.cards[0].image}')"></div>
+               <div class = "card-image" style = "background-image: url('${card.image}')"></div>
                <div class = "top-content">
-                 <h5 class = "card-title">${player.cards[0].title}</h5>
+                 <h5 class = "card-title">${card.title}</h5>
                </div>
              </div>
              <div class = "card-bottom">
-               ${playCard(player.cards[0])}
+               ${playCard(card)}
              </div>
            </div>
          </div>`;
      return html;
   },
-  notSelectable: function(player) {
+  notSelectable: function(card) {
     let html = 
     `<div class = "card">
        <div class = "card-content">
          <div class = "card-top">
-           <div class = "card-image" style = "background-image: url('${player.cards[0].image}')"></div>
+           <div class = "card-image" style = "background-image: url('${card.image}')"></div>
            <div class = "top-content">
-             <h5 class = "card-title">${player.cards[0].title}</h5>
+             <h5 class = "card-title">${card.title}</h5>
            </div>
          </div>
          <div class = "card-bottom">
-           ${showCard(player.cards[0])}
+           ${showCard(card)}
          </div>
        </div>
      </div>`;
@@ -157,6 +157,7 @@ const modCard = {
   }
 };
 
+
 export const renderPlayers = {
   selective: function(player1, player2) {
     elements.bannerContent.innerHTML =  
@@ -165,7 +166,7 @@ export const renderPlayers = {
         <div class="player-title title">
           <h4>You</h4>
         </div>
-        ${modCard.selectable(player1)}
+        ${modCard.selectable(player1.cards[0])}
         <div class="score">
           <h4>${modCard.playerScore(player1)} Cards</h4>
         </div>
@@ -193,7 +194,7 @@ export const renderPlayers = {
           <h4>You</h4>
           <h4>${player1.stat ? player1.stat : ""}</h4>
         </div>
-        ${modCard.notSelectable(player1)}
+        ${modCard.notSelectable(player1.cards[0])}
         <div class="score">
           <h4>${modCard.playerScore(player1)} Cards</h4>
         </div>
@@ -203,7 +204,7 @@ export const renderPlayers = {
           <h4>Your Opponent</h4>
           <h4>${player2.stat ? player2.stat : ""}</h4>
         </div>
-        ${modCard.notSelectable(player2)}
+        ${modCard.notSelectable(player2.cards[0])}
         <div class="score">
           <h4>${modCard.playerScore(player2)} Cards</h4>
         </div>
@@ -218,7 +219,7 @@ export const renderPlayers = {
         <div class="player-title title">
           <h4>You</h4>
         </div>
-        ${modCard.notSelectable(player1)}
+        ${modCard.notSelectable(player1.cards[0])}
         <div class="score">
           <h4>${modCard.playerScore(player1)} Cards</h4>
         </div>
@@ -242,25 +243,26 @@ export const addGameBar = a => {
   a.insertAdjacentHTML('beforeend', html);
 };
 
-const listCards = (player) => {
-
-}
-
 export const showAllCards = (a, player) => {
+  console.log(player.cards);
   a.innerHTML = `
       <div class="final-mode">
         <div class="player">
           <div class="player-title title">
-            <h4>${player === p1 ? "You" : "Your Opponent"}</h4>
-            <h4>Game Winner</h4>
+            <h4>${player.id === 0 ? "You Won" : "Your Opponent Won"}</h4>
           </div>
           <ul class="list-cards">
             
           </ul>
           <div class="score">
-            <h4>Cards</h4>
+            <h4>${player.id === 0 ? "You Won" : "Your Opponent"} have all ${player.cards.length} cards</h4>
           </div>
         </div>`;
+
+  player.cards.forEach(card => {
+    let markup = `<li>${modCard.notSelectable(card)}</li>`;
+    document.querySelector('.list-cards').insertAdjacentHTML('beforeend', markup);
+  });
 }
 
 

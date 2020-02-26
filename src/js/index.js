@@ -58,15 +58,23 @@ const cardsCtrl = {
   }
 };
 
-const atrBtnClicked = (attribute, player1, player2, player3) => {
+const atrBtnClicked = (attribute, player1, player2, player3, arr, arr2) => {
   // 1. Set selective to false
   if (player1.cards.length > 0 && player2.cards.length > 0) {
     // 2. Set player stats
     gameCtrl.compareCards(attribute, player1, player2, player3);
-  };
-  
-  console.log(player1.turn);
-  console.log(player2.turn);
+  } 
+
+  console.log(`Player 1 cards: ${player1.cards.length}`);
+  console.log(`Player 2 cards: ${player2.cards.length}`);
+
+  if (player2.cards.length === 0) {
+    gamePlaying = false;
+    cardView.cleanField(cont);
+    const winner = gameCtrl.lastRound(player1, player2, player3);
+    cardView.showAllCards(cont, winner);
+    console.log(winner);
+  } 
 };
 
 const navBtn = (btnOpt, player1, player2, player3, arr) => {
@@ -76,7 +84,16 @@ const navBtn = (btnOpt, player1, player2, player3, arr) => {
     player2.cards = [];
     init();
   } else if (btnOpt === "next-card") {
-    gameCtrl.nextCards(player1, player2, player3, arr);
+    if(gamePlaying) {
+      gameCtrl.nextCards(player1, player2, player3, arr);
+      if (player1.cards.length === 0) {
+        gamePlaying = false;
+        cardView.cleanField(cont);
+        const winner = gameCtrl.lastRound(player1, player2, player3);
+        cardView.showAllCards(cont, winner);
+        console.log(winner);
+      } 
+    }
   }
 };
 
@@ -85,7 +102,7 @@ cont.addEventListener('click', e => {
   const btn = e.target.closest('.atr-btn');
   if(btn) {
     const atr = btn.dataset.goto;
-    atrBtnClicked(atr, p1, p2, tie, );
+    atrBtnClicked(atr, p1, p2, tie, attributesOp, allCards);
   }
 });
 
@@ -94,11 +111,6 @@ cont.addEventListener('click', e => {
   if(nav) {
     const navName = nav.dataset.goto;
     navBtn(navName, p1, p2, tie, attributesOp);
-    console.log(p1.cards);
-    console.log(p2.cards);
-    console.log(tie.cards)
-    console.log(p1.turn);
-    console.log(p2.turn);
   }
 });
 
@@ -106,8 +118,9 @@ cont.addEventListener('click', e => {
 function init() {
   // 1. Set gamePlaying true
   gamePlaying = true;
-  p1.turn = "P1 plays"
-  p2.turn = "P2 doesn't play"
+  p1.turn = "P1 plays";
+  p1.tieStat = "Winner";
+  p2.turn = "P2 doesn't play";
 
   // 2. Clean the banner & add the player divs
   cardView.cleanField(cont);
