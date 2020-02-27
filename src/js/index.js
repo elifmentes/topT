@@ -58,40 +58,36 @@ const cardsCtrl = {
   }
 };
 
-const atrBtnClicked = (attribute, player1, player2, player3, arr, arr2) => {
+const atrBtnClicked = (atr, p1, p2, p3) => {
   // 1. Set selective to false
-  if (player1.cards.length > 0 && player2.cards.length > 0) {
+  if (p1.cards.length > 0 && p2.cards.length > 0) {
+    
     // 2. Set player stats
-    gameCtrl.compareCards(attribute, player1, player2, player3);
-  } 
+    gameCtrl.winnerPlays(atr, p1, p2, p3);
+  }; 
 
-  console.log(`Player 1 cards: ${player1.cards.length}`);
-  console.log(`Player 2 cards: ${player2.cards.length}`);
-
-  if (player2.cards.length === 0) {
+  if (p2.cards.length === 0) {
     gamePlaying = false;
     cardView.cleanField(cont);
-    const winner = gameCtrl.lastRound(player1, player2, player3);
+    const winner = gameCtrl.lastRound(p1, p2, p3);
     cardView.showAllCards(cont, winner);
-    console.log(winner);
   } 
 };
 
-const navBtn = (btnOpt, player1, player2, player3, arr) => {
+const navBtn = (btnOpt, p1, p2, p3, arr) => {
   if (btnOpt === "play-game") {
     // 1. Reset Player Cards
-    player1.cards = [];
-    player2.cards = [];
+    p1.cards = [];
+    p2.cards = [];
     init();
   } else if (btnOpt === "next-card") {
     if(gamePlaying) {
-      gameCtrl.nextCards(player1, player2, player3, arr);
+      gameCtrl.nextCards(p1, p2, p3, arr);
       if (player1.cards.length === 0) {
         gamePlaying = false;
         cardView.cleanField(cont);
-        const winner = gameCtrl.lastRound(player1, player2, player3);
+        const winner = gameCtrl.lastRound(p1, p2, p3);
         cardView.showAllCards(cont, winner);
-        console.log(winner);
       } 
     }
   }
@@ -118,19 +114,15 @@ cont.addEventListener('click', e => {
 function init() {
   // 1. Set gamePlaying true
   gamePlaying = true;
-  p1.turn = "P1 plays";
+  p1.turn = "plays";
   p1.tieStat = "Winner";
-  p2.turn = "P2 doesn't play";
+  p2.turn = "waits";
 
   // 2. Clean the banner & add the player divs
   cardView.cleanField(cont);
 
   // 3. Shuffle and deal cards
   cardsCtrl.dealCards(allCards, p1, p2);
-
-  console.log(allCards);
-  console.log(p1);
-  console.log(p2);
 
   // 4. Render player
   cardView.renderPlayers.selective(p1, p2);
