@@ -183,7 +183,7 @@ export const renderPlayers = {
     </div>
     ${markupNav}`;
   },
-  notSelective: function (player1, player2, player3) {
+  notSelective: function (p1Card, p2Card, player1, player2, player3) {
     elements.bannerContent.innerHTML =  
     `<div class="game-stat">
       <h4>${player3.stat ? player3.stat : ""}</h4>
@@ -192,9 +192,9 @@ export const renderPlayers = {
       <div class="player">
         <div class="player-title title">
           <h4>You</h4>
-          <h4>${player1.stat ? player1.stat : ""}</h4>
+          <h4>${player1.turn === "plays" ? "Won" : "Lost"}</h4>
         </div>
-        ${modCard.notSelectable(player1.cards[0])}
+        ${modCard.notSelectable(p1Card)}
         <div class="score">
           <h4>${modCard.playerScore(player1)} Cards</h4>
         </div>
@@ -202,9 +202,9 @@ export const renderPlayers = {
       <div class="opponent">
         <div class="opponent-title title">
           <h4>Your Opponent</h4>
-          <h4>${player2.stat ? player2.stat : ""}</h4>
+          <h4>${player2.turn === "plays" ? "Won" : "Lost"}</h4>
         </div>
-        ${modCard.notSelectable(player2.cards[0])}
+        ${modCard.notSelectable(p2Card)}
         <div class="score">
           <h4>${modCard.playerScore(player2)} Cards</h4>
         </div>
