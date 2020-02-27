@@ -1,9 +1,5 @@
 import { elements } from './base';
 
-export const getInput = () => {
-
-};
-
 export const cleanField = (a) => {
   a.innerHTML = "";
 };
@@ -24,50 +20,47 @@ const markupNav = `<div class="navbar">
   </div>
 </div>`
 
-const playCard = card => {
-  const html = 
-  `<div class = "card-attributes">
-    <div class = "card-attributes-left card-atrbs">
-      <a href = "#" class = "card-attribute atr-btn" data-goto="strength">
+const markupCard = {
+  withBtn: function(card) {
+    const html = 
+    `<div class="card-attributes-left card-atrbs">
+      <a href="#" class="card-attribute atr-btn" data-goto="strength">
         <h5 class="strength-atr atr">Strength: </h5>
         <h5 class="strength-button">${card.strength}</h5>
       </a>
-      <a href = "#" class = "card-attribute atr-btn card-middle" data-goto="skill">
+      <a href="#" class="card-attribute atr-btn" data-goto="skill">
         <h5 class="skill-atr atr">Skill: </h5>
         <h5 class="skill-button">${card.skill}</h5>
       </a>
-      <a href = "#" class = "card-attribute atr-btn" data-goto="size">
+      <a href="#" class="card-attribute atr-btn" data-goto="size">
         <h5 class="size-atr atr">Size: </h5>
         <h5 class="size-button">${card.size}</h5>
       </a>
     </div>
-    <div class = "card-attributes-right card-atrbs">
-      <a href = "#" class = "card-attribute atr-btn" data-goto="wisecracks">
+    <div class="card-attributes-right card-atrbs">
+      <a href="#" class="card-attribute atr-btn" data-goto="wisecracks">
         <h5 class="wisecracks-atr atr">Wisecracks: </h5>
         <h5 class="wisecracks-button">${card.wisecracks}</h5>
       </a>
-      <a href = "#" class = "card-attribute atr-btn card-middle" data-goto="mystique">
+      <a href="#" class="card-attribute atr-btn" data-goto="mystique">
         <h5 class="mystique-atr atr">Mystique: </h5>
         <h5 class="mystique-button">${card.mystique}</h5>
       </a>
-      <a href = "#" class = "card-attribute atr-btn" data-goto="rating">
+      <a href="#" class="card-attribute atr-btn" data-goto="rating">
         <h5 class="rating-atr atr">Rating: </h5>
         <h5 class="rating-button">${card.rating}</h5>
       </a>
-    </div>
-  </div>`;
+    </div>`;
   return html;
-};
-
-const showCard = card => {
-  const html = 
-  `<div class = "card-attributes">
-    <div class = "card-attributes-left card-atrbs">
+  },
+  withoutBtn: function(card) {
+    const html = 
+    `<div class="card-attributes-left card-atrbs">
       <div class="card-attribute">
         <h5 class="strength-atr atr">Strength: </h5>
         <h5 class="strength-button">${card.strength}</h5>
       </div>
-      <div class="card-attribute card-middle">
+      <div class="card-attribute">
         <h5 class="skill-atr atr">Skill: </h5>
         <h5 class="skill-button">${card.skill}</h5>
       </div>
@@ -76,12 +69,12 @@ const showCard = card => {
         <h5 class="size-button">${card.size}</h5>
       </div>
     </div>
-    <div class = "card-attributes-right card-atrbs">
+    <div class="card-attributes-right card-atrbs">
       <div class="card-attribute">
         <h5 class="wisecracks-atr atr">Wisecracks: </h5>
         <h5 class="wisecracks-button">${card.wisecracks}</h5>
       </div>
-      <div class = "card-attribute card-middle">
+      <div class="card-attribute">
         <h5 class="mystique-atr atr">Mystique: </h5>
         <h5 class="mystique-button">${card.mystique}</h5>
       </div>
@@ -89,101 +82,77 @@ const showCard = card => {
         <h5 class="rating-atr atr">Rating: </h5>
         <h5 class="rating-button">${card.rating}</h5>
       </div>
-    </div>
-  </div>`
+    </div>`;
   return html;
-};
-
-const cardCover = () => {
-  const html = `<div class="card"><div class = "card-content"><img id="backCard" src="img/topTrumps.png"></div></div>`;
-  return html;
-};
-
-const modCard = {
-  selectable: function(card) {
-    let html = `<div class = "card">
-           <div class = "card-content">
-             <div class = "card-top">
-               <div class = "card-image" style = "background-image: url('${card.image}')"></div>
-               <div class = "top-content">
-                 <h5 class = "card-title">${card.title}</h5>
-               </div>
-             </div>
-             <div class = "card-bottom">
-               ${playCard(card)}
-             </div>
-           </div>
-         </div>`;
-     return html;
   },
-  notSelectable: function(card) {
-    let html = 
-    `<div class = "card">
-       <div class = "card-content">
-         <div class = "card-top">
-           <div class = "card-image" style = "background-image: url('${card.image}')"></div>
-           <div class = "top-content">
-             <h5 class = "card-title">${card.title}</h5>
-           </div>
-         </div>
-         <div class = "card-bottom">
-           ${showCard(card)}
-         </div>
-       </div>
-     </div>`;
-     return html;
+  cover: function() {
+    const html = `<div class="card"><div class = "card-content"><img id="backCard" src="img/topTrumps.png"></div></div>`;
+    return html;
   },
-
   playerScore: function(player) {
     return player.cards.length;
   },
-
-  notSelectableAll: function(card) {
-    let html = 
-    `<div class = "card">
-       <div class = "card-content">
-         <div class = "card-top">
-           <div class = "card-image" style = "background-image: url('${card.image}')"></div>
-           <div class = "top-content">
-             <h5 class = "card-title">${card.title}</h5>
-           </div>
-         </div>
-         <div class = "card-bottom">
-           ${showCard(card)}
-         </div>
-       </div>
-     </div>`;
-     return html;
+  cardFull: function(card, html) {
+    const mark = 
+    `<div class="card">
+      <div class="card-content">
+      <div class="card-top">
+        <div class = "card-image" style = "background-image: url('${card.image}')"></div>
+        <div class="top-content">
+          <h5 class="card-title">${card.title}</h5>
+        </div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-attributes">${html}</div>
+      </div>
+      </div>
+    </div>`;
+    return mark;
   }
 };
 
+const tieMark = (p1, p2) => {
+  let html;
+  if (p2.stat === "tie") {
+    html = "";
+  } else if (p1.turn === "plays") {
+    html = "Won";
+  } else if (p1.turn === "waits") {
+    html = "Lost";
+  }
+  return html;
+}
 
 export const renderPlayers = {
   selective: function(player1, player2) {
+    const html = markupCard.withBtn(player1.cards[0]);
     elements.bannerContent.innerHTML =  
     `<div class="game-mode">
       <div class="player">
         <div class="player-title title">
           <h4>You</h4>
         </div>
-        ${modCard.selectable(player1.cards[0])}
+        ${markupCard.cardFull(player1.cards[0], html)}
         <div class="score">
-          <h4>${modCard.playerScore(player1)} Cards</h4>
+          <h4>${markupCard.playerScore(player1)} Cards</h4>
         </div>
       </div>
       <div class="opponent">
         <div class="opponent-title title">
           <h4>Your Opponent</h4>
         </div>
-        ${cardCover()}
+        ${markupCard.cover()}
         <div class="score">
-          <h4>${modCard.playerScore(player2)} Cards</h4>
+          <h4>${markupCard.playerScore(player2)} Cards</h4>
         </div>
       </div>
     </div>
     ${markupNav}`;
   },
   notSelective: function (p1Card, p2Card, player1, player2, player3) {
+    const html1 = markupCard.withoutBtn(p1Card);
+    const html2 = markupCard.withoutBtn(p2Card);
+
     elements.bannerContent.innerHTML =  
     `<div class="game-stat">
       <h4>${player3.stat ? player3.stat : ""}</h4>
@@ -192,45 +161,46 @@ export const renderPlayers = {
       <div class="player">
         <div class="player-title title">
           <h4>You</h4>
-          <h4>${player1.turn === "plays" ? "Won" : "Lost"}</h4>
+          <h4>${tieMark(player1, player3)}</h4>
         </div>
-        ${modCard.notSelectable(p1Card)}
+        ${markupCard.cardFull(p1Card, html1)}
         <div class="score">
-          <h4>${modCard.playerScore(player1)} Cards</h4>
+          <h4>${markupCard.playerScore(player1)} Cards</h4>
         </div>
       </div>
       <div class="opponent">
         <div class="opponent-title title">
           <h4>Your Opponent</h4>
-          <h4>${player2.turn === "plays" ? "Won" : "Lost"}</h4>
+          <h4>${tieMark(player2, player3)}</h4>
         </div>
-        ${modCard.notSelectable(p2Card)}
+        ${markupCard.cardFull(p2Card, html2)}
         <div class="score">
-          <h4>${modCard.playerScore(player2)} Cards</h4>
+          <h4>${markupCard.playerScore(player2)} Cards</h4>
         </div>
       </div>
     </div>
     ${markupNav}`;
   },
   opponentWin: function(player1, player2) {
+    const html = markupCard.withoutBtn(player1.cards[0]);
     elements.bannerContent.innerHTML =  
     `<div class="game-mode">
       <div class="player">
         <div class="player-title title">
           <h4>You</h4>
         </div>
-        ${modCard.notSelectable(player1.cards[0])}
+        ${markupCard.cardFull(player1.cards[0], html)}
         <div class="score">
-          <h4>${modCard.playerScore(player1)} Cards</h4>
+          <h4>${markupCard.playerScore(player1)} Cards</h4>
         </div>
       </div>
       <div class="opponent">
         <div class="opponent-title title">
           <h4>Your Opponent</h4>
         </div>
-        ${cardCover()}
+        ${markupCard.cover()}
         <div class="score">
-          <h4>${modCard.playerScore(player2)} Cards</h4>
+          <h4>${markupCard.playerScore(player2)} Cards</h4>
         </div>
       </div>
     </div>
@@ -260,7 +230,9 @@ export const showAllCards = (a, player) => {
         </div>`;
 
   player.cards.forEach(card => {
-    let markup = `<li>${modCard.notSelectable(card)}</li>`;
+    let html = markupCard.withoutBtn(card);
+
+    let markup = `<li>${markupCard.cardFull(card, html)}</li>`;
     document.querySelector('.list-cards').insertAdjacentHTML('beforeend', markup);
   });
 }
