@@ -15,12 +15,21 @@ const cont = elements.bannerContent;
 const attributesOp = ["strength", "skill", "size", "wisecracks", "mystique", "rating"];
 
 // define game cards
-const allCards = [new card("Iron Man", 30, 9, 10, 5, 20, 10, "./img/ironMan.png"), new card("Dr. Strange", 15, 7, 8, 2, 80, 8, "./img/drStrange.png"),
-new card("Captain America", 28, 10, 10, 2, 25, 9, "./img/captainAmerica.png"), new card("Ant-Man", 10, 10, 1, 1, 25, 7, "./img/antMan.png"),
-new card("Hulk", 50, 2, 5, 1, 20, 9, "./img/hulk.png"), new card("Thor", 30, 3, 11, 1, 75, 9, "./img/thor.png")];
+const allCards = [
+  new card("Iron Man", 30, 9, 10, 5, 20, 10, "./img/ironMan.png"), 
+  new card("Dr. Strange", 15, 7, 8, 2, 80, 8, "./img/drStrange.png"),
+  new card("Captain America", 28, 10, 10, 2, 25, 9, "./img/captainAmerica.png"), 
+  new card("Ant-Man", 10, 10, 1, 1, 25, 7, "./img/antMan.png"),
+  new card("Hulk", 50, 2, 5, 1, 20, 9, "./img/hulk.png"), 
+  new card("Thor", 30, 3, 11, 1, 75, 9, "./img/thor.png")
+];
 
 // define players
-const players = [new player(0, []), new player(1, []), new player(2, [])];
+const players = [
+  new player(0, []), 
+  new player(1, []), 
+  new player(2, [])
+];
 
 // player shortcuts
 const p1 = players[0];
@@ -83,7 +92,7 @@ const navBtn = (btnOpt, p1, p2, p3, arr) => {
   } else if (btnOpt === "next-card") {
     if(gamePlaying) {
       gameCtrl.nextCards(p1, p2, p3, arr);
-      if (player1.cards.length === 0) {
+      if (p1.cards.length === 0) {
         gamePlaying = false;
         cardView.cleanField(cont);
         const winner = gameCtrl.lastRound(p1, p2, p3);
@@ -114,9 +123,9 @@ cont.addEventListener('click', e => {
 function init() {
   // 1. Set gamePlaying true
   gamePlaying = true;
-  p1.turn = "plays";
+  p1.turn = "firstRound";
   p1.tieStat = "Winner";
-  p2.turn = "waits";
+  p2.turn = "firstRound";
 
   // 2. Clean the banner & add the player divs
   cardView.cleanField(cont);
@@ -126,6 +135,9 @@ function init() {
 
   // 4. Render player
   cardView.renderPlayers.selective(p1, p2);
+
+  console.log(p1.cards);
+  console.log(p2.cards);
 };
 
 

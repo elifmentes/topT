@@ -1,133 +1,225 @@
-import card from './models/Card';
-import player from './models/Player';
-import { elements } from './views/base';
-import * as cardView from './views/cardView';
-import * as gameCtrl from './controllers/gameController';
+import { elements } from './base';
 
-// Pick game card category
-// Play with your friend
-// Play with multiple friends
-// Play with your own top trumps cards
+export const cleanField = (a) => {
+  a.innerHTML = "";
+};
 
-// game variables
-let selective, gamePlaying; 
-const cont = elements.bannerContent;
+const markupNav = `<div class="navbar">
+  <div class="nav-left nav">
+    <a href="#" class="btn-green btn-green-nav" data-goto="play-game">
+      <img src="img/play.png" alt="Play!" class="btn start-game" id="play-btn">
+    </a>
+    <a href="#" class="btn-green btn-green-nav" data-goto="next-card">
+      <img src="img/next.png" alt="Play!" class="btn next-game" id="next-btn">
+    </a>
+  </div>
+  <div class="nav-right nav">
+    <a href="#" class="btn-green btn-green-nav" data-goto="settings-game">
+      <img src="img/settings.png" alt="Play!" class="btn settings" id="settings-btn">
+    </a>
+  </div>
+</div>`
 
-// define game cards
-const allCards = [new card("Iron Man", 30, 9, 10, 5, 20, 10, "./img/ironMan.png"), new card("Dr. Strange", 15, 7, 8, 2, 80, 8, "./img/drStrange.png"),
-new card("Captain America", 28, 10, 10, 2, 25, 9, "./img/captainAmerica.png"), new card("Ant-Man", 10, 10, 1, 1, 25, 7, "./img/antMan.png"),
-new card("Hulk", 50, 2, 5, 1, 20, 9, "./img/hulk.png"), new card("Thor", 30, 3, 11, 1, 75, 9, "./img/thor.png")];
-
-// define players
-const players = [new player(0, []), new player(1, []), new player(3, [])];
-
-// player shortcuts
-const p1 = players[0];
-const p2 = players[1];
-const tie = players[2];
-
-// cards controller
-const cardsCtrl = {
-  // 1. Shuffle Cards
-  shuffle: function(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+const markupCard = {
+  withBtn: function(card) {
+    const html = 
+    `<div class="card-attributes-left card-atrbs">
+      <a href="#" class="card-attribute atr-btn" data-goto="strength">
+        <h5 class="strength-atr atr">Strength: </h5>
+        <h5 class="strength-button">${card.strength}</h5>
+      </a>
+      <a href="#" class="card-attribute atr-btn" data-goto="skill">
+        <h5 class="skill-atr atr">Skill: </h5>
+        <h5 class="skill-button">${card.skill}</h5>
+      </a>
+      <a href="#" class="card-attribute atr-btn" data-goto="size">
+        <h5 class="size-atr atr">Size: </h5>
+        <h5 class="size-button">${card.size}</h5>
+      </a>
+    </div>
+    <div class="card-attributes-right card-atrbs">
+      <a href="#" class="card-attribute atr-btn" data-goto="wisecracks">
+        <h5 class="wisecracks-atr atr">Wisecracks: </h5>
+        <h5 class="wisecracks-button">${card.wisecracks}</h5>
+      </a>
+      <a href="#" class="card-attribute atr-btn" data-goto="mystique">
+        <h5 class="mystique-atr atr">Mystique: </h5>
+        <h5 class="mystique-button">${card.mystique}</h5>
+      </a>
+      <a href="#" class="card-attribute atr-btn" data-goto="rating">
+        <h5 class="rating-atr atr">Rating: </h5>
+        <h5 class="rating-button">${card.rating}</h5>
+      </a>
+    </div>`;
+  return html;
   },
-
-  // 2. Deal Cards
-  dealCards: function(arr, player1, player2) {
-    let cards1, cards2;
-    cardView.cleanField(cont);
-
-    this.shuffle(arr);
-    cards1 = player1.cards;
-    cards2 = player2.cards;
-
-    const half = arr.length / 2;
-    for(let i = 0; i < half; i++) {
-      cards1.push(arr[i])
-    }
-
-    for(let i = half; i < arr.length; i++) {
-      cards2.push(arr[i])
-    }
+  withoutBtn: function(card) {
+    const html = 
+    `<div class="card-attributes-left card-atrbs">
+      <div class="card-attribute atr-btn">
+        <h5 class="strength-atr atr">Strength: </h5>
+        <h5 class="strength-button">${card.strength}</h5>
+      </div>
+      <div class="card-attribute atr-btn">
+        <h5 class="skill-atr atr">Skill: </h5>
+        <h5 class="skill-button">${card.skill}</h5>
+      </div>
+      <div class="card-attribute atr-btn">
+        <h5 class="size-atr atr">Size: </h5>
+        <h5 class="size-button">${card.size}</h5>
+      </div>
+    </div>
+    <div class="card-attributes-right card-atrbs">
+      <div class="card-attribute atr-btn">
+        <h5 class="wisecracks-atr atr">Wisecracks: </h5>
+        <h5 class="wisecracks-button">${card.wisecracks}</h5>
+      </div>
+      <div class="card-attribute atr-btn">
+        <h5 class="mystique-atr atr">Mystique: </h5>
+        <h5 class="mystique-button">${card.mystique}</h5>
+      </div>
+      <div class="card-attribute atr-btn">
+        <h5 class="rating-atr atr">Rating: </h5>
+        <h5 class="rating-button">${card.rating}</h5>
+      </div>
+    </div>`;
+  return html;
+  },
+  cover: function() {
+    const html = `<div class="card"><div class = "card-content"><img id="backCard" src="img/topTrumps.png"></div></div>`;
+    return html;
+  },
+  playerScore: function(player) {
+    return player.cards.length;
+  },
+  cardFull: function(card, html) {
+    const mark = 
+    `<div class="card">
+      <div class="card-content">
+      <div class="card-top">
+        <div class = "card-image" style = "background-image: url('${card.image}')"></div>
+        <div class="top-content">
+          <h5 class="card-title">${card.title}</h5>
+        </div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-attributes">${html}</div>
+      </div>
+      </div>
+    </div>`;
+    return mark;
   }
 };
 
-const atrBtnClicked = (attribute, player1, player2, player3) => {
-  // 1. Set selective to false
-  selective = false;
-  // 2. Set player stats
-  gameCtrl.compareCards(attribute, player1, player2, player3);
-  // 3. Pass cards
-  // gameCtrl.passingCard(player1, player2, player3);
-  // 4. Render both player cards without buttons 
-  cardView.setPlayers.notSelective(cont, player1, player2, player3);
-  
-};
-
-const navBtn = (btnOpt, player1, player2, player3) => {
-  if (btnOpt === "play-game") {
-    // 1. Reset Player Cards
-    player1.cards = [];
-    player2.cards = [];
-    init();
-  } else if (btnOpt === "next-card") {
-    gameCtrl.passingCard(player1, player2, player3);
-    cardView.setPlayers.selective(cont, player1, player2, player3);
-    console.log(p1.cards);
-    console.log(p2.cards);
-    console.log(tie.cards);
+export const renderPlayers = {
+  selective: function(player1, player2) {
+    const html = markupCard.withBtn(player1.cards[0]);
+    elements.bannerContent.innerHTML =  
+    `<div class="game-mode">
+      <div class="player">
+        <div class="player-title title">
+          <h4>You</h4>
+        </div>
+        ${markupCard.cardFull(player1.cards[0], html)}
+        <div class="score">
+          <h4>${markupCard.playerScore(player1)} Cards</h4>
+        </div>
+      </div>
+      <div class="opponent">
+        <div class="opponent-title title">
+          <h4>Your Opponent</h4>
+        </div>
+        ${markupCard.cover()}
+        <div class="score">
+          <h4>${markupCard.playerScore(player2)} Cards</h4>
+        </div>
+      </div>
+    </div>
+    ${markupNav}`;
+  },
+  notSelective: function (p1Card, p2Card, player1, player2, player3) {
+    const html1 = markupCard.withoutBtn(p1Card);
+    const html2 = markupCard.withoutBtn(p2Card);
+    elements.bannerContent.innerHTML =  
+    `<div class="game-stat">
+      <h4>${player3.stat ? player3.stat : ""}</h4>
+    </div>
+    <div class="game-mode">
+      <div class="player">
+        <div class="player-title title">
+          <h4>You</h4>
+          <h4>${player1.turn === "plays" ? "Won" : "Lost"}</h4>
+        </div>
+        ${markupCard.cardFull(p1Card, html1)}
+        <div class="score">
+          <h4>${markupCard.playerScore(player1)} Cards</h4>
+        </div>
+      </div>
+      <div class="opponent">
+        <div class="opponent-title title">
+          <h4>Your Opponent</h4>
+          <h4>${player2.turn === "plays" ? "Won" : "Lost"}</h4>
+        </div>
+        ${markupCard.cardFull(p2Card, html2)}
+        <div class="score">
+          <h4>${markupCard.playerScore(player2)} Cards</h4>
+        </div>
+      </div>
+    </div>
+    ${markupNav}`;
+  },
+  opponentWin: function(player1, player2) {
+    const html = markupCard.withoutBtn(player1.cards[0]);
+    elements.bannerContent.innerHTML =  
+    `<div class="game-mode">
+      <div class="player">
+        <div class="player-title title">
+          <h4>You</h4>
+        </div>
+        ${markupCard.cardFull(player1.cards[0], html1)}
+        <div class="score">
+          <h4>${markupCard.playerScore(player1)} Cards</h4>
+        </div>
+      </div>
+      <div class="opponent">
+        <div class="opponent-title title">
+          <h4>Your Opponent</h4>
+        </div>
+        ${markupCard.cover()}
+        <div class="score">
+          <h4>${markupCard.playerScore(player2)} Cards</h4>
+        </div>
+      </div>
+    </div>
+    ${markupNav}`;
   }
 };
 
-cont.addEventListener('click', e => {
-  const btn = e.target.closest('.card-attribute');
-  if(btn) {
-    const atr = btn.dataset.goto;
-    atrBtnClicked(atr, p1, p2, tie, selective);
-    console.log(p1.cards);
-    console.log(p2.cards);
-    console.log(tie.cards)
-  }
-});
-
-cont.addEventListener('click', e => {
-  const nav = e.target.closest('.btn-green-nav');
-  if(nav) {
-    const navName = nav.dataset.goto;
-    navBtn(navName, p1, p2, tie);
-  }
-});
-
-// Initialization
-
-function init() {
-  // 1. Set gamePlaying true
-  gamePlaying = true;
-
-  // 2. Set selective to true
-  selective = true;
-
-  // 3. Clean the banner & add the player divs
-  cardView.cleanField(cont);
-
-  // 4. Shuffle and deal cards
-  cardsCtrl.dealCards(allCards, p1, p2);
-
-  console.log(allCards);
-  console.log(p1);
-  console.log(p2);
-
-  cardView.setPlayers.selective(cont, p1, p2);
-  // 5. Start playing
-  // gamePlay();
+export const addGameBar = a => {
+  const html = `<div class="navbar"><a href="#" class="btn-green"><img src="img/play.png" alt="Play!" class="btn start-game" id="play-btn"></a></div>`;
+  a.insertAdjacentHTML('beforeend', html);
 };
 
+export const showAllCards = (a, player) => {
+  console.log(player.cards);
+  a.innerHTML = `
+      <div class="final-mode">
+        <div class="player">
+          <div class="player-title title">
+            <h4>${player.id === 0 ? "You Won" : "Your Opponent Won"}</h4>
+          </div>
+          <ul class="list-cards">
+            
+          </ul>
+          <div class="score">
+            <h4>${player.id === 0 ? "You Won" : "Your Opponent"} have all ${player.cards.length} cards</h4>
+          </div>
+        </div>`;
 
-document.getElementById(elements.newGame).addEventListener('click', e => {
-    init();
-});
+  player.cards.forEach(card => {
+    let markup = `<li>${modCard.notSelectable(card)}</li>`;
+    document.querySelector('.list-cards').insertAdjacentHTML('beforeend', markup);
+  });
+}
+
+
