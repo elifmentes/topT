@@ -140,5 +140,8 @@ export const getInput = () => {
 };
 
 export const getValues = () => {
-	console.log(models.categories);
+	const category = models.categories[categories.length - 1];
+	for(let i = 0; i < category.num; i ++) {
+		
+	}
 };
