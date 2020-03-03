@@ -8,7 +8,7 @@ import * as cardCtrl from './controllers/cardsController';
 import * as models from './seeds';
 
 // game variables
-let selective, gamePlaying, cards; 
+let selective, gamePlaying, cards;
 
 const cont = elements.bannerContent;
 // shortcuts
@@ -59,9 +59,9 @@ cont.addEventListener('click', e => {
 function init() {
   // 1. Set gamePlaying true
   gamePlaying = true;
-  p1.turn = "plays";
+  p1.turn = "firstRound";
   p1.tieStat = "Winner";
-  p2.turn = "waits";
+  p2.turn = "firstRound";
 
   // 2. Clean the banner & add the player divs
   cardView.cleanField(cont);
@@ -71,5 +71,8 @@ function init() {
 
   // 4. Render player
   cardView.renderPlayers.selective(p1, p2);
+
+  console.log(p1.cards);
+  console.log(p2.cards);
 };
 
