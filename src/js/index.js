@@ -37,6 +37,15 @@ cont.addEventListener('click', e => {
   }
 });
 
+// SUBMIT NEW CATEGORY
+elements.ctgr.addEventListener('submit', e => {
+  e.preventDefault();
+  console.log(e.currentTarget);
+  const res = categoryView.getInput();
+  models.newCategory(res);
+  categoryView.getValues();
+})
+
 // ATTRIBUTE BUTTONS
 cont.addEventListener('click', e => {
   const btn = e.target.closest('.atr-btn');

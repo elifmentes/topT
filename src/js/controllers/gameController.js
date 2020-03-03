@@ -64,11 +64,6 @@ const compareCards = (atr, p1, p2, p3) => {
     p3.stat = "tie";
     return p3;
   }
-  // } else if(p1.turn === "firstRound" && p2.turn === "firstRound" && p3.turn === "tie") {
-  //   cardView.renderPlayers.selective(p1, p2);
-  //   p1.turn = "plays";
-  //   p2.turn = "waits";
-  // };
 };
 
 // 4. Changes depending on the winner

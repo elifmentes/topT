@@ -14,8 +14,4 @@ export const elements = {
   ctgr: document.querySelector('.categories'),
   title: document.querySelector('.banner-title'),
   ctgrT: document.querySelector('.category-card'),
-
-  catTitle: document.getElementById('category-title'),
-  catNum: document.getElementById('category-number'),
-  submit: document.getElementById('submit')
 }

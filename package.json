@@ -15,7 +15,10 @@
   "author": "elifmentes",
   "license": "ISC",
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "faker": "^4.1.0",
+    "knex": "^0.20.10",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
