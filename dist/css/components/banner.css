@@ -1,15 +1,21 @@
 .banner {
   display: flex;
-  align-items: center;
   justify-content: space-around;
   text-align: center;
   background-size: cover;
   height: 100vh;
+  align-items: center;
+}
+
+.after-banner {
 }
 
 .banner-content {
   color: white;
-  width: 100%;
+}
+
+.banner-content a {
+  text-decoration: none;
 }
 
 .banner-content h1 {
