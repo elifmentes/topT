@@ -1,0 +1,27 @@
+.categories {
+  width: auto;
+  margin: 30px;
+}
+
+.category-card {
+  width: 250px;
+  height: 250px;
+  padding: 50px;
+}
+
+
+.category a {
+  text-decoration: none;
+  color: white;
+}
+
+.category-title {
+  text-decoration: none;
+  color: white;
+}
+
+.category-title h4 {
+	text-decoration: none;
+	color: white;
+}
+
