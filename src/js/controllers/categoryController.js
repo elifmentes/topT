@@ -11,7 +11,7 @@ export const whichMButton = (btn) => {
 
 	} else if (btn.dataset.goto === "category-custom") {
 	  console.log(btn);
-	  elements.title.innerHTML = "Your Category";
+	  elements.title.innerHTML = "";
 	  cardView.cleanField(elements.ctgr);
 	  categoryView.showForm();
 	}

@@ -28,7 +28,7 @@ const markupCard = {
         <h5 class="strength-atr atr">Strength: </h5>
         <h5 class="strength-button">${card.strength}</h5>
       </a>
-      <a href="#" class="card-attribute atr-btn" data-goto="skill">
+      <a href="#" class="card-attribute atr-btn atr-mid" data-goto="skill">s
         <h5 class="skill-atr atr">Skill: </h5>
         <h5 class="skill-button">${card.skill}</h5>
       </a>
@@ -42,7 +42,7 @@ const markupCard = {
         <h5 class="wisecracks-atr atr">Wisecracks: </h5>
         <h5 class="wisecracks-button">${card.wisecracks}</h5>
       </a>
-      <a href="#" class="card-attribute atr-btn" data-goto="mystique">
+      <a href="#" class="card-attribute atr-btn atr-mid" data-goto="mystique">
         <h5 class="mystique-atr atr">Mystique: </h5>
         <h5 class="mystique-button">${card.mystique}</h5>
       </a>
@@ -57,29 +57,29 @@ const markupCard = {
     const html = 
     `<div class="card-attributes-left card-atrbs">
       <div class="card-attribute">
-        <h5 class="strength-atr atr">Strength: </h5>
+        <h5 class="atr">Strength: </h5>
         <h5 class="strength-button">${card.strength}</h5>
       </div>
-      <div class="card-attribute">
-        <h5 class="skill-atr atr">Skill: </h5>
+      <div class="card-attribute atr-mid">
+        <h5 class="atr">Skill: </h5>
         <h5 class="skill-button">${card.skill}</h5>
       </div>
       <div class="card-attribute">
-        <h5 class="size-atr atr">Size: </h5>
+        <h5 class="atr">Size: </h5>
         <h5 class="size-button">${card.size}</h5>
       </div>
     </div>
     <div class="card-attributes-right card-atrbs">
       <div class="card-attribute">
-        <h5 class="wisecracks-atr atr">Wisecracks: </h5>
+        <h5 class="atr">Wisecracks: </h5>
         <h5 class="wisecracks-button">${card.wisecracks}</h5>
       </div>
-      <div class="card-attribute">
-        <h5 class="mystique-atr atr">Mystique: </h5>
+      <div class="card-attribute atr-mid">
+        <h5 class="atr">Mystique: </h5>
         <h5 class="mystique-button">${card.mystique}</h5>
       </div>
       <div class="card-attribute">
-        <h5 class="rating-atr atr">Rating: </h5>
+        <h5 class="atr">Rating: </h5>
         <h5 class="rating-button">${card.rating}</h5>
       </div>
     </div>`;
