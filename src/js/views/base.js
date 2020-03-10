@@ -14,8 +14,17 @@ export const elements = {
   ctgr: document.querySelector('.categories'),
   title: document.querySelector('.banner-title'),
   ctgrT: document.querySelector('.category-card'),
+  cardValueDiv: document.querySelector('.card__values'),
 
-  catTitle: document.getElementById('category-title'),
+  catTitle: document.querySelector('.cat__title'),
+
+  // catAtr1: document.getElementById('category-atr1'),
+  // catAtr2: document.getElementById('category-atr2'),
+  // catAtr3: document.getElementById('category-atr3'),
+  // catAtr4: document.getElementById('category-atr4'),
+  // catAtr5: document.getElementById('category-atr5'),
+  // catAtr6: document.getElementById('category-atr6'),
+
   catNum: document.getElementById('category-number'),
   submit: document.getElementById('submit')
 }

@@ -99,6 +99,16 @@
   width: auto;
 }
 
+.card__values {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.category-value {
+  height: 15px;
+  width: 15px;
+}
 
 
 

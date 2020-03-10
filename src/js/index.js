@@ -55,6 +55,28 @@ cont.addEventListener('click', e => {
   }
 });
 
+// Submit button 
+cont.addEventListener('click', e => {
+  const smt = e.target.closest('.submit-btn');
+  if(smt) {
+    const catTitle = document.querySelector('.cat__title');
+    const catAtr1 = document.querySelector('.cat__atr1');
+    const catAtr2 = document.querySelector('.cat__atr2');
+    const catAtr3 = document.querySelector('.cat__atr3');
+    const catAtr4 = document.querySelector('.cat__atr4');
+    const catAtr5 = document.querySelector('.cat__atr5');
+    const catAtr6 = document.querySelector('.cat__atr6');
+    const catNum = document.querySelector('.cat__num');
+
+    models.addCategory(models.categories, catTitle.value, catAtr1.value, catAtr2.value, catAtr3.value, catAtr4.value, catAtr5.value, catAtr6.value, catNum.value);
+
+
+    const newCategory = categoryView.theInput(models.categories);
+    models.addCatToCards(models.allCards, newCategory);
+    categoryView.values(newCategory);
+  }
+})
+
 // Initialization
 function init() {
   // 1. Set gamePlaying true
