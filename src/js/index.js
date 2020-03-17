@@ -66,14 +66,18 @@ cont.addEventListener('click', e => {
     const catAtr4 = document.querySelector('.cat__atr4');
     const catAtr5 = document.querySelector('.cat__atr5');
     const catAtr6 = document.querySelector('.cat__atr6');
-    const catNum = document.querySelector('.cat__num');
+    const catNum = parseInt(document.querySelector('.cat__num').value);
 
-    models.addCategory(models.categories, catTitle.value, catAtr1.value, catAtr2.value, catAtr3.value, catAtr4.value, catAtr5.value, catAtr6.value, catNum.value);
+    if (catNum >= 6 && catCtrl.catAtrs(catTitle.value) && catCtrl.catAtrs(catAtr1.value) && catCtrl.catAtrs(catAtr2.value) && catCtrl.catAtrs(catAtr3.value) && catCtrl.catAtrs(catAtr4.value) && catCtrl.catAtrs(catAtr5.value) && catCtrl.catAtrs(catAtr6.value)) {
+      models.addCategory(models.categories, catTitle.value, catAtr1.value, catAtr2.value, catAtr3.value, catAtr4.value, catAtr5.value, catAtr6.value, catNum);
 
-
-    const newCategory = categoryView.theInput(models.categories);
-    models.addCatToCards(models.allCards, newCategory);
-    categoryView.values(newCategory);
+      const newCategory = categoryView.theInput(models.categories);
+      models.addCatToCards(models.allCards, newCategory);
+      categoryView.values(newCategory);
+    } else {
+      alert('please enter a number min 6');
+      catCtrl.customize();
+    }
   }
 })
 

@@ -114,6 +114,12 @@ const forms = {
 	}
 };
 
+export const numPlayers = (n) => {
+	if (n < 6) {
+		alert('please enter a number greater than 6');
+	}
+}
+
 export const showForm = () => {
 	let html = forms.categoryForm();
 	elements.ctgr.insertAdjacentHTML('beforeend', html);
